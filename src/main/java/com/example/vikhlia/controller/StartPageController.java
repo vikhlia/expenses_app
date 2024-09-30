@@ -12,13 +12,14 @@ public class StartPageController {
 
     @GetMapping("/start")
     public String startPage(Model model) {
+        User user = new User();
+        user.setName("");
         model.addAttribute("user", new User());
         return "start";
     }
 
     @PostMapping("/submit")
     public String submit(@ModelAttribute User user, Model model) {
-
         model.addAttribute("user", user);
         return "submit";
     }
