@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Our main page for expenses app</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>My finances</h1>
+<h4 th:text="'All incomes: ' + ${allIncomes}"/>
+<h4 th:text="'All expenses: ' + ${allExpenses}"/>
+<h2>Add new transaction</h2>
+<form th:action="@{/main}" th:object="${viewTransaction}" method="post">
+    <p>Choose type of operation:
+        <select name="type">
+        <option th:each="typeOpt : ${T(com.example.vikhlia.entity.Type).values()}"
+                th:value="${typeOpt}" th:text="${typeOpt}"></option>
+    </select></p>
+    <p>Choose category of operation:
+        <input type="text" list="category" />
+        <datalist id="category">
+            <option th:each="category : ${category}" th:value="${category}" th:text="${category}"></option>
+        </datalist>
+    </select></p>
+    <p>Enter amount:
+        <input type="text" th:field="*{amount}" id="amount" placeholder="amount"></p>
+    <p><input type="submit" value="Submit" /></p>
+</form>
+</body>
+</html>
