@@ -3,15 +3,10 @@ package com.example.vikhlia.utils;
 import com.example.vikhlia.entity.Category;
 import com.example.vikhlia.entity.Transaction;
 import com.example.vikhlia.entity.Type;
-import com.example.vikhlia.service.CategoryServiceImpl;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -52,33 +47,34 @@ public class UtilsService {
         return (transaction.getType().equals("Expense"));
     }
 
-    public Transaction transformToTransaction(ViewTransaction viewTransaction){
+    public Transaction transformToTransaction(ViewTransaction viewTransaction) {
         Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String transactionTime = simpleDateFormat.format(date);
         Transaction transaction = new Transaction();
         transaction.setId(viewTransaction.getId());
         transaction.setAmount(viewTransaction.getAmount());
-        transaction.setDate(date);
+        transaction.setDate(transactionTime);
         transaction.setType(setTypeTransaction(viewTransaction.getType()));
-//        transaction.setCategory(getCatregoryId(viewTransaction.getCategory(), categories));
 
         return transaction;
     }
 
-    public int getCategoryId(String name, List<Category> categoriesList){
+    public int getCategoryId(String name, List<Category> categoriesList) {
         int id = 0;
-        for(Category category : categoriesList ){
-            if(category.getName().equals(name))
-                id=category.getId();
+        for (Category category : categoriesList) {
+            if (category.getName().equals(name))
+                id = category.getId();
         }
         return id;
 
     }
 
-    public String setTypeTransaction(Type type){
+    public String setTypeTransaction(Type type) {
         String stringType;
-        if(type.equals(Type.EXPENSE)){
+        if (type.equals(Type.EXPENSE)) {
             stringType = "Expense";
-        } else if (type.equals(Type.INCOME)){
+        } else if (type.equals(Type.INCOME)) {
             stringType = "INCOME";
         } else {
             throw new NullPointerException("Field Type is null");
@@ -89,5 +85,4 @@ public class UtilsService {
     public boolean checkCatergoryIsExist(String name, List<String> namesList) {
         return namesList.contains(name);
     }
-
 }

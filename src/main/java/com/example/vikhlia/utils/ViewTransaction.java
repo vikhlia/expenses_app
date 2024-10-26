@@ -1,6 +1,5 @@
 package com.example.vikhlia.utils;
 
-import com.example.vikhlia.entity.Category;
 import com.example.vikhlia.entity.Type;
 import jakarta.persistence.Id;
 import lombok.Data;
@@ -14,6 +13,6 @@ public class ViewTransaction {
     private long amount;
     private Date date;
     private Type type;
-    private Category category;
+    private String category;
 
 }

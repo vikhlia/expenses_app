@@ -14,15 +14,19 @@
         <select name="type">
         <option th:each="typeOpt : ${T(com.example.vikhlia.entity.Type).values()}"
                 th:value="${typeOpt}" th:text="${typeOpt}"></option>
-    </select></p>
-    <p>Choose category of operation:
-        <input type="text" list="category" />
-        <datalist id="category">
+        </select>
+    </p>
+    <p>
+        <label for="category">Choose category of operation:</label>
+        <input list="categories" name="category" id="category" required/>
+        <datalist id="categories">
             <option th:each="category : ${category}" th:value="${category}" th:text="${category}"></option>
         </datalist>
-    </select></p>
+        </select>
+    </p>
     <p>Enter amount:
-        <input type="text" th:field="*{amount}" id="amount" placeholder="amount"></p>
+        <input name="amount" th:value="${amount}" required>
+    </p>
     <p><input type="submit" value="Submit" /></p>
 </form>
 </body>

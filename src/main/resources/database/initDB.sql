@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS transactions
 (
     id BIGSERIAL PRIMARY KEY ,
     amount NUMERIC NOT NULL ,
-    date TIMESTAMP NOT NULL ,
+    date VARCHAR NOT NULL ,
     type VARCHAR NOT NULL,
     category INTEGER NOT NULL
     );

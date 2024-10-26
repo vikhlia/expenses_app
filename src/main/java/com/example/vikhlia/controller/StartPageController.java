@@ -2,7 +2,6 @@ package com.example.vikhlia.controller;
 
 import com.example.vikhlia.entity.Category;
 import com.example.vikhlia.entity.Transaction;
-import com.example.vikhlia.entity.User;
 import com.example.vikhlia.service.CategoryServiceImpl;
 import com.example.vikhlia.service.TransactionServiceImpl;
 import com.example.vikhlia.utils.UtilsService;
@@ -27,15 +26,6 @@ public class StartPageController {
 
     @Autowired
     UtilsService utilsService;
-
-
-    @GetMapping("/start")
-    public String startPage(Model model) {
-        User user = new User();
-        user.setName("");
-        model.addAttribute("user", new User());
-        return "start";
-    }
 
     @GetMapping("/main")
     public String mainPage(Model model) {
@@ -62,26 +52,22 @@ public class StartPageController {
         return "redirect:/main";
     }
 
-
-
-    public int getCategoryId(Category viewCategory){
+    public int getCategoryId(String categoryName) {
 
         List<Category> categoryList = categoryServiceIml.getAllCategories();
         List<String> categoryNamesList = utilsService.getCategoriesNames(categoryList);
-        String viewCategoryName = viewCategory.getName();
 
-        if (!utilsService.checkCatergoryIsExist(viewCategoryName, categoryNamesList)) {
+        if (!utilsService.checkCatergoryIsExist(categoryName, categoryNamesList)) {
             try {
                 Category category = new Category();
-                category.setName(viewCategoryName);
+                category.setName(categoryName);
                 categoryServiceIml.saveCategory(category);
-            } catch (Exception e){
+                categoryList = categoryServiceIml.getAllCategories();
+            } catch (Exception e) {
                 System.out.println("Exception in getCategoryID " + e);
                 return -1;
             }
         }
-
-        return utilsService.getCategoryId(viewCategoryName, categoryList);
-
+        return utilsService.getCategoryId(categoryName, categoryList);
     }
 }
