@@ -5,6 +5,8 @@
 
 После успешной настройки переменных окружения, нужно перейти в папку expenses_app и открыть из нее консоль Git-Bash
 
+Для запуска локально на машине:
+
 В консоли выполнить последовательно команды:
 
 Для компиляции приложения: mvn compile
@@ -12,3 +14,15 @@
 Для запуска приложения: mvn exec:java -Dexec.mainClass="com.example.vikhlia.ExpensesAppApplication"
 
 После успешного запуска, приложение должно работать по адресу: http://localhost:8080/
+
+Для запуска приложения с помощью docker-compose
+
+Выполнить в консоли команды:
+
+mvn clean
+
+mvn package
+
+docker build --tag=expenses_app:latest .
+
+docker-compose up

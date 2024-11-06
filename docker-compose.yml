@@ -1,0 +1,31 @@
+version: '1'
+services:
+# DB
+  postgres:
+    image: postgres:15.8-alpine
+    container_name: postgres
+    network_mode: bridge
+    expose:
+      - 5555
+    ports:
+      - 5555:5555
+    volumes:
+      - ./src/main/resources/database/initDB.sql:/initDB.d/initDB.sql
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+  # APP 
+  expenses_app:
+    container_name:  expenses_app
+    build: 
+      context: docker-expenses_app
+      dockerfile: Dockerfile
+    network_mode: bridge
+    ports:
+      - 8080:8080
+    image: expenses_app
+    restart: unless-stopped
+    depends_on:
+      - postgres
+  
