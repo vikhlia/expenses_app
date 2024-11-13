@@ -1,5 +1,3 @@
-DROP DATABASE IF EXISTS transactions;
-
 CREATE TABLE transactions
 (
     id BIGSERIAL PRIMARY KEY ,
@@ -8,8 +6,6 @@ CREATE TABLE transactions
     type VARCHAR NOT NULL,
     category INTEGER NOT NULL
     );
-
-DROP DATABASE IF EXISTS category;
 
 CREATE TABLE category
 (
