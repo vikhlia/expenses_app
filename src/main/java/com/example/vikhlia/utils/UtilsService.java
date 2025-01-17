@@ -6,9 +6,7 @@ import com.example.vikhlia.entity.Type;
 import lombok.Data;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Data
@@ -48,13 +46,10 @@ public class UtilsService {
     }
 
     public Transaction transformToTransaction(ViewTransaction viewTransaction) {
-        Date date = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String transactionTime = simpleDateFormat.format(date);
         Transaction transaction = new Transaction();
         transaction.setId(viewTransaction.getId());
         transaction.setAmount(viewTransaction.getAmount());
-        transaction.setDate(transactionTime);
+        transaction.setDate(viewTransaction.getDate());
         transaction.setType(setTypeTransaction(viewTransaction.getType()));
 
         return transaction;
@@ -75,7 +70,7 @@ public class UtilsService {
         if (type.equals(Type.EXPENSE)) {
             stringType = "Expense";
         } else if (type.equals(Type.INCOME)) {
-            stringType = "INCOME";
+            stringType = "Income";
         } else {
             throw new NullPointerException("Field Type is null");
         }

@@ -7,14 +7,6 @@
 
 ## Для запуска приложения с помощью docker-compose
 
-### Выполнить в консоли команды:
-
-mvn clean
-
-mvn package
-
-docker build --tag=expenses_app:latest .
-
-docker-compose up
+Запустить файл start_app.sh
 
 После успешного запуска, приложение должно работать по адресу: http://localhost:8080/

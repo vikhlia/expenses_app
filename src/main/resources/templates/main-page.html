@@ -10,6 +10,9 @@
 <h4 th:text="'All expenses: ' + ${allExpenses}"/>
 <h2>Add new transaction</h2>
 <form th:action="@{/main}" th:object="${viewTransaction}" method="post">
+    <p>Choose date:
+        <input type="date" name="date" th:value="${date}" required>
+    </p>
     <p>Choose type of operation:
         <select name="type">
         <option th:each="typeOpt : ${T(com.example.vikhlia.entity.Type).values()}"
