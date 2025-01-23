@@ -7,10 +7,10 @@ COPY pom.xml .
 COPY src ./src
 
 # Собираем проект
-RUN mvn clean package
+RUN mvn clean install
 
 # Используем JDK 17 для запуска (вместо Maven образа)
-FROM openjdk:17-jdk-slim
+FROM adoptopenjdk/openjdk17:alpine
 
 # Копируем собранный артефакт
 COPY target/vikhlia-1.0.1-SNAPSHOT.jar vikhlia-1.0.1-SNAPSHOT.jar
